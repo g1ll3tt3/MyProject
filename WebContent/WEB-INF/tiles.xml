@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE tiles-definitions PUBLIC 
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+ "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
+
+<tiles-definitions>
+   
+   <definition name="baseLayout" template="/html/view/base_layout.jsp">
+      	<put-attribute name="title"  value=""/>
+      	<put-attribute name="header" value="/html/view/_header.jsp"/>
+      	<put-attribute name="body" value=""/>
+		<put-attribute name="footer" value="/html/view/_footer.jsp" />
+		<put-attribute name="img" value="/img/"></put-attribute>
+		
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/css/bootstrap.css" />
+			<add-attribute value="/css/freelancer.css" />
+			<add-attribute value="/css/style.css" />
+			<add-attribute value="/css/font-awesome.css" />
+			<add-attribute value="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
+			<add-attribute value="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" />
+		</put-list-attribute>
+
+		<put-list-attribute name="javascripts">
+			<!-- jQuery -->
+	        <add-attribute value="/js/jquery-2.2.2.js" />
+	        
+	        <!-- Bootstrap Core JavaScript -->
+	        <add-attribute value="/js/bootstrap.js" />
+	        
+	        <!-- Plugin JavaScript -->
+	        <add-attribute value="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.jss" />
+	        
+	        <!-- Theme JavaScript -->
+	        <add-attribute value="/js/myjavascript.js" />
+	        
+	        <!-- Contact Form JavaScript -->
+	        <add-attribute value="/js/contact_me.js" />
+	        <add-attribute value="/js/jqBootstrapValidation.js" />
+	    </put-list-attribute>
+   </definition>
+   
+   <definition name="login-success" extends="baseLayout"> 
+		<put-attribute name="title" value="Welcome Page"/> 
+	   	<put-attribute name="body" value="/html/pages/login/success.jsp"/>
+   </definition>
+   
+   <definition name="login-error" extends="baseLayout"> 
+	   	<put-attribute name="title" value="Login Error"/> 
+	   	<put-attribute name="body" value="/html/pages/login/error.jsp"/> 
+   </definition> 
+   
+   <definition name="about-success" extends="baseLayout"> 
+		<put-attribute name="title" value="Welcome Page"/> 
+	   	<put-attribute name="body" value="/html/pages/about.jsp"/> 
+   </definition>
+   
+</tiles-definitions>

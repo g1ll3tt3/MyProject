@@ -1,0 +1,10 @@
+#login-frame {
+  
+  margin: 0 auto;
+  margin-top: 6%;
+  width:400px;
+  background: #CaCaCa;
+  height:330px;
+  box-shadow: 0px 0px 10px 4px;  
+  border-radius: 16px;
+}
