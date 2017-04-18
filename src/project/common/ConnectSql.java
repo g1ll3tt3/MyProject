@@ -30,12 +30,9 @@ public class ConnectSql {
 	}
 	
 	public Connection getConnect() throws ClassNotFoundException, SQLException{
-		
-		
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 		System.out.println("Ket noi thanh cong");
-		
 		
 		return connection;
 	}

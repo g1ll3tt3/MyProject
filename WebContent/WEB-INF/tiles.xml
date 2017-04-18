@@ -11,7 +11,6 @@
       	<put-attribute name="header" value="/html/view/_header.jsp"/>
       	<put-attribute name="body" value=""/>
 		<put-attribute name="footer" value="/html/view/_footer.jsp" />
-		<put-attribute name="img" value="/img/"></put-attribute>
 		
 		<put-list-attribute name="stylesheets">
 			<add-attribute value="/css/bootstrap.css" />
@@ -23,19 +22,10 @@
 		</put-list-attribute>
 
 		<put-list-attribute name="javascripts">
-			<!-- jQuery -->
 	        <add-attribute value="/js/jquery-2.2.2.js" />
-	        
-	        <!-- Bootstrap Core JavaScript -->
 	        <add-attribute value="/js/bootstrap.js" />
-	        
-	        <!-- Plugin JavaScript -->
 	        <add-attribute value="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.jss" />
-	        
-	        <!-- Theme JavaScript -->
 	        <add-attribute value="/js/myjavascript.js" />
-	        
-	        <!-- Contact Form JavaScript -->
 	        <add-attribute value="/js/contact_me.js" />
 	        <add-attribute value="/js/jqBootstrapValidation.js" />
 	    </put-list-attribute>
