@@ -20,15 +20,18 @@
 		<action name="about" class="project.action.AboutAction">
 			<result name="success" type="tiles">about-success</result>
 		</action>
-		
-		
-
 	</package>
 	
 	<package name="auth" extends="tiles-default" namespace="/auth">
 		<action name="loginProcess" class="project.action.LoginAction" >
 			<result name="success" type="tiles">login-success</result>
 			<result name="error" type="tiles">login-error</result>
+		</action>
+	</package>
+	
+	<package name="management" extends="tiles-default" namespace="/management">
+		<action name="index" class="project.action.ManagementAction" >
+			<result name="success">/html/pages/management/index.jsp</result>
 		</action>
 	</package>
 
