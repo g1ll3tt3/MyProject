@@ -21,6 +21,8 @@
 	
 
 	<tiles:insertAttribute name="header" />
+	
+	<tiles:insertAttribute name="slogan" />
 
 	<tiles:insertAttribute name="body" />
 

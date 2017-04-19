@@ -11,10 +11,15 @@ public class LoginAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private Account account;
 	
-	@Override
-	public String execute() throws Exception {
+	public String showLogin() throws Exception {
 		
-		if(account.getUsername().equals("admin")) {
+		return SUCCESS;
+
+	}
+	
+	public String checkLogin() throws Exception {
+		
+		if ("admin".equals(account.getUsername())) {
 			return SUCCESS;
 		} else {
 			return ERROR;
@@ -22,13 +27,13 @@ public class LoginAction extends ActionSupport {
 
 	}
 
-	@Override
-	public void validate() {
-		if (account.getUsername().length() == (0)) {
-            this.addFieldError("user.username", "Name is required");
-        }
-        
-	}
+//	@Override
+//	public void validate() {
+//		if (account.getUsername().length() == (0)) {
+//            this.addFieldError("user.username", "Name is required");
+//        }
+//        
+//	}
 
 	public Account getAccount() {
 		return account;

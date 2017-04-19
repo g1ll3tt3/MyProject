@@ -24,7 +24,8 @@
 				<li class="page-scroll"><a href="#portfolio">Portfolio</a></li>
 				<li class="page-scroll"><a href="${varUrl }/about">About</a></li>
 				<li class="page-scroll"><a href="#contact">Contact</a></li>
-				<li class="page-scroll"><a href="#" id="login-popup">Login</a>
+				<li class="page-scroll"><a href="${varUrl }/auth/login" >Login</a>
+				<li class="page-scroll"><a href="${varUrl }/management/index">Management</a>
 				</li>
 			</ul>
 		</div>
@@ -33,20 +34,4 @@
 	<!-- /.container-fluid -->
 </nav>
 
-<!-- Header -->
-<header>
-	<div class="container" id="maincontent" tabindex="-1">
-		<div class="row">
-			<div class="col-lg-12">
-				<img class="img-responsive" src="${varUrl }/img/profile.png" alt="">
 
-				<div class="intro-text">
-					<h1 class="name">Le The Thang</h1>
-					<hr class="star-light">
-					<span class="skills">Web Developer - Graphic Artist - User
-						Experience Designer</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</header>

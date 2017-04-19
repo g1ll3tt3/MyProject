@@ -23,9 +23,9 @@
 <body>
 	<jsp:include page="html/view/_header.jsp"></jsp:include>
 	
-	<jsp:include page="html/view/_body.jsp"></jsp:include>
+	<jsp:include page="html/view/_slogan.jsp"></jsp:include>
 	
-	<jsp:include page="html/pages/login/login.jsp"></jsp:include>
+	<jsp:include page="html/view/_body.jsp"></jsp:include>
 	
 	<jsp:include page="html/view/_footer.jsp"></jsp:include>
 </body>
