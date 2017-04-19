@@ -1,2 +1,2 @@
 # MyProject
-Thang's Project, will help Thang to be good
+J1nz's Project, will help J1nz to be good
