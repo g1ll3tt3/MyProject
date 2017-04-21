@@ -28,7 +28,7 @@
 			<result name="error" type="tiles">show-login-error</result>
 		</action>
 	
-		<action name="checkLogin" class="project.action.LoginAction" method="checkLogin">
+		<action name="checkLogin" class="project.action.LoginAction" method="login">
 			<result name="success" type="tiles">index-management-success</result>
 			<result name="error" type="tiles">login-error</result>
 		</action>

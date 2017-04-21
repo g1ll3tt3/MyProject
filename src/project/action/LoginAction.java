@@ -3,12 +3,12 @@ package project.action;
 import com.opensymphony.xwork2.ActionSupport;
 
 import project.model.bean.Account;
+import project.model.bo.AccountBO;
 
 public class LoginAction extends ActionSupport {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
+	private AccountBO accountBo = AccountBO.getInstance();
 	private Account account;
 	
 	public String showLogin() throws Exception {
@@ -17,9 +17,8 @@ public class LoginAction extends ActionSupport {
 
 	}
 	
-	public String checkLogin() throws Exception {
-		
-		if ("admin".equals(account.getUsername())) {
+	public String login() throws Exception {
+		if (accountBo.checkLogin(account)) {
 			return SUCCESS;
 		} else {
 			return ERROR;
