@@ -41,7 +41,7 @@
    </definition>
    
 <!--    Begin Login area -->
-   <definition name="show-login-success" extends="baseLayout"> 
+   <definition name="show-login-page" extends="baseLayout"> 
 		<put-attribute name="title" value="Login Page"/>
 		<put-attribute name="header" value=""/> 
 		<put-attribute name="slogan" value=""/> 

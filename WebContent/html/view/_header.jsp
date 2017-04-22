@@ -1,6 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
-<c:set var="varUrl" value="${pageContext.request.contextPath }"></c:set>
+<s:url action="index" namespace="/" var="index"/>
+<s:url action="about" namespace="/" var="about"/>
+<s:url action="contact" namespace="/" var="contact"/>
+<s:url action="login" namespace="/auth" var="login"/>
 
 <!-- Navigation -->
 <nav id="mainNav"
@@ -13,7 +17,7 @@
 				<span class="sr-only">Toggle navigation</span> Menu <i
 					class="fa fa-bars"></i>
 			</button>
-			<a class="navbar-brand" href="${varUrl }/index">Thang Le</a>
+			<a class="navbar-brand" href="${index }">Thang Le</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -22,10 +26,9 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
 				<li class="page-scroll"><a href="#portfolio">Portfolio</a></li>
-				<li class="page-scroll"><a href="${varUrl }/about">About</a></li>
-				<li class="page-scroll"><a href="#contact">Contact</a></li>
-				<li class="page-scroll"><a href="${varUrl }/auth/login" >Login</a>
-				<li class="page-scroll"><a href="${varUrl }/management/index">Management</a>
+				<li class="page-scroll"><a href="${about }">About</a></li>
+				<li class="page-scroll"><a href="${contact }">Contact</a></li>
+				<li class="page-scroll"><a href="${login }" >Login</a>
 				</li>
 			</ul>
 		</div>

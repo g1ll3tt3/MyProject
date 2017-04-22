@@ -20,23 +20,63 @@
 		<action name="about" class="project.action.AboutAction">
 			<result name="success" type="tiles">about-success</result>
 		</action>
+		
+		<action name="contact" class="project.action.ContactAction">
+			<result name="success" type="tiles">contact-success</result>
+		</action>
 	</package>
 
 	<package name="auth" extends="tiles-default" namespace="/auth">
 		<action name="login" class="project.action.LoginAction" method="showLogin" >
-			<result name="success" type="tiles">show-login-success</result>
-			<result name="error" type="tiles">show-login-error</result>
+			<result name="show_login" type="tiles">show-login-page</result>
+			<result name="error_show_login" type="tiles">show-login-error</result>
+			<result name="login_exist" type="redirectAction">
+				<param name="actionName">index</param>
+	            <param name="namespace">/management</param>
+			</result>
+			
 		</action>
 	
-		<action name="checkLogin" class="project.action.LoginAction" method="login">
-			<result name="success" type="tiles">index-management-success</result>
+		<action name="checkLogin" class="project.action.LoginAction" method="checkLogin">
+			<result name="success" type="chain">
+	            <param name="actionName">index</param>
+	            <param name="namespace">/management</param>
+	        </result>
+	        
+	        <result name="show_login" type="redirectAction">
+	            <param name="actionName">login</param>
+	            <param name="namespace">/auth</param>
+	        </result>
+			
 			<result name="error" type="tiles">login-error</result>
+		</action>
+		
+		<action name="logout" class="project.action.LoginAction" method="logout">
+			<result name="success" type="redirectAction">
+	            <param name="actionName">login</param>
+	            <param name="namespace">/auth</param>
+	        </result>
+	        <result name="error" type="redirectAction">
+	            <param name="actionName">index</param>
+	            <param name="namespace">/</param>
+	        </result>
 		</action>
 	</package>
 	
 	<package name="management" extends="tiles-default" namespace="/management">
 		<action name="index" class="project.action.ManagementAction" >
 			<result name="success" type="tiles">index-management-success</result>
+			
+			<result name="show_login" type="redirectAction">
+				<param name="actionName">login</param>
+	            <param name="namespace">/auth</param>
+			</result>
+			
+			<result name="not_admin" type="redirectAction">
+				<param name="actionName">login</param>
+	            <param name="namespace">/auth</param>
+			</result>
+			
 			<result name="error" type="tiles">index-management-error</result>
 		</action>
 	</package>

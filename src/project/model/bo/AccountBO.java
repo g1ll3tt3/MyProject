@@ -1,13 +1,20 @@
 package project.model.bo;
 
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.hibernate.dialect.Ingres10Dialect;
+
+import project.common.Contants;
 import project.model.bean.Account;
+import project.model.dao.IAccountDAO;
 import project.model.daoImpl.AccountDAOImpl;
+import project.model.enumClass.Role;
 
 public class AccountBO {
 	private static AccountBO instance = null;
-	private AccountDAOImpl accountDao = null;
+	private IAccountDAO accountDao = null;
 	
 	public AccountBO() {
 		try {
@@ -26,11 +33,51 @@ public class AccountBO {
 	}
 
 	public boolean checkLogin(Account account) {
-		if (accountDao.checkLogin(account)) {
-			return true;
-		} else {
-			return false;
-		}
+		try {
 			
+			if (accountDao.checkLogin(account)) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;	
+	}
+	
+	public Account getAccountByIdOrUsername(String id) {
+		Account account = new Account();
+		
+		// Check id is number or not number
+		Pattern pattern = Pattern.compile("\\d*"); 
+        Matcher matcher = pattern.matcher(id);
+        
+        if (matcher.matches()) { 
+            account = accountDao.getAccountById(Integer.valueOf(id));
+        } else { 
+            account = accountDao.getAccountByUsername(id);
+        }
+
+		return account;
+	}
+
+	public String checkTypeAccByUsername(String usernameSession) {
+		String role = "";
+		
+		Pattern pattern = Pattern.compile("\\d*"); 
+        Matcher matcher = pattern.matcher(usernameSession);
+        
+        if (matcher.matches()) { 
+            role = accountDao.getRoleByAccountId(Integer.valueOf(usernameSession));
+        } else { 
+            role = accountDao.getRoleByUsername(usernameSession);
+            
+            if (Integer.valueOf(role) == 1) {
+            	role = Role.ADMIN.value();
+            }
+        }
+        
+		return role;
 	}
 }

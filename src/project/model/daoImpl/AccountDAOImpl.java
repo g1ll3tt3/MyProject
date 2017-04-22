@@ -11,7 +11,10 @@ import java.util.List;
 
 import project.common.ConnectSql;
 import project.common.Contants;
-import project.common.SqlHelperImpl;
+import project.common.sqlHelper.ISqlHelperConnection;
+import project.common.sqlHelper.ISqlHelperDatabase;
+import project.common.sqlHelper.ISqlHelperString;
+import project.common.sqlHelperImpl.SqlHelperImpl;
 import project.model.bean.Account;
 import project.model.dao.IAccountDAO;
 
@@ -21,14 +24,17 @@ import project.model.dao.IAccountDAO;
  */
 public class AccountDAOImpl implements IAccountDAO {
 	private static AccountDAOImpl instance = null;
+	
 	private Connection cn = null;
 	private PreparedStatement pstm = null;
 	private ResultSet rs = null;
-	private SqlHelperImpl sql = null;
+	
+	private ISqlHelperDatabase sHelperDb = SqlHelperImpl.getInstance();
+	private ISqlHelperString sHelperStr = SqlHelperImpl.getInstance();
+	private ISqlHelperConnection sHelperCon = ConnectSql.getInstance();
 	
 	public AccountDAOImpl() throws ClassNotFoundException, SQLException {
-		cn = ConnectSql.getInstance().getConnect();
-		sql = SqlHelperImpl.getInstance();
+		cn = sHelperCon.getConnect();
 	}
 	
 	public static AccountDAOImpl getInstance() throws ClassNotFoundException, SQLException {
@@ -38,77 +44,159 @@ public class AccountDAOImpl implements IAccountDAO {
 		return instance;
 	}
 	
-	/* (non-Javadoc)
-	 * @see project.model.dao.IAccountDAO#checkLogin(project.model.bean.Account)
-	 */
 	@Override
-	public boolean checkLogin(Account account) {
-		String sql_str = sql.selColFromTabWhereCon(Contants.COL_ACCOUNTID, 
-				Contants.TABLE_ACCOUNT, Contants.COL_USERNAME + " = ? and " + Contants.COL_PASSWORD + " = ?");
-		System.out.println(sql_str);
+	public boolean checkLogin(Account account) throws SQLException {
+		
+		String sel_account_id = sHelperStr.strSelectWithWhere(Contants.COL_ACCOUNTID, Contants.TAB_ACCOUNT, 
+				Contants.COL_USERNAME + " = ? and " + Contants.COL_PASSWORD + " = ?");
+		
+		System.out.println(sel_account_id);
+		
+		pstm = cn.prepareStatement(sel_account_id);
+		pstm.setString(1, account.getUsername());
+		pstm.setString(2, account.getPassword());
+		
+		rs = pstm.executeQuery();
+		
+		if (rs.next()) {
+			return true;
+//			account.setAccountId(rs.getInt(Contants.COL_ACCOUNTID));
+//			account.setUsername(rs.getString(Contants.COL_USERNAME));
+//			account.setIsActive(rs.getInt(Contants.COL_ISACTIVE));
+//			account.setRole(rs.getString(Contants.COL_ROLE));
+		}
+		
+		return false;
+	}
+
+	@Override
+	public String getRoleByAccountId(int id) {
+		String sql = sHelperStr.strSelectWithWhere(Contants.COL_ISACTIVE, Contants.TAB_ACCOUNT, Contants.COL_ACCOUNTID + " = ?");
 		
 		try {
-			pstm = cn.prepareStatement(sql_str);
-			pstm.setString(1, account.getUsername());
-			pstm.setString(2, account.getPassword());
+			pstm = cn.prepareStatement(sql);
+			
+			pstm.setInt(1, id);
 			
 			rs = pstm.executeQuery();
 			
 			if (rs.next()) {
-				return true;
+				return rs.getString(Contants.COL_ISACTIVE);
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see project.model.dao.IAccountDAO#getRoleByAccountId(java.lang.String)
-	 */
-	@Override
-	public String getRoleByAccountId(String id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see project.model.dao.IAccountDAO#checkExist(java.lang.String)
-	 */
 	@Override
 	public boolean checkExist(String id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see project.model.dao.IAccountDAO#checkIsActive(java.lang.String)
-	 */
 	@Override
 	public boolean checkIsActive(String id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see project.model.dao.IAccountDAO#getAccountInforById(java.lang.String)
-	 */
 	@Override
-	public Account getAccountInforById(String id) {
-		// TODO Auto-generated method stub
+	public Account getAccountById(int id) {
+		Account account = null;
+		
+		try {
+			String col = Contants.COL_USERNAME + ", " + Contants.COL_ACCOUNTID 
+					+ ", " + Contants.COL_ISACTIVE + ", " + Contants.COL_ROLE + ", " + Contants.COL_PERSONID;
+			
+			String sel_account = sHelperStr.strSelectWithWhere(col, Contants.TAB_ACCOUNT, 
+					Contants.COL_ACCOUNTID + " = ?");
+			
+			System.out.println(sel_account);
+			
+			pstm = cn.prepareStatement(sel_account);
+			pstm.setInt(1, id);
+			
+			rs = pstm.executeQuery();
+			
+			if (rs.next()) {
+				account = new Account();
+				account.setAccountId(rs.getInt(Contants.COL_ACCOUNTID));
+				account.setUsername(rs.getString(Contants.COL_USERNAME));
+				account.setIsActive(rs.getInt(Contants.COL_ISACTIVE));
+				account.setRole(rs.getString(Contants.COL_ROLE));
+				account.setPersonId(rs.getInt(Contants.COL_PERSONID));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return account;
+	}
+
+	@Override
+	public List<Account> getListAccount() {
+		// TODO List all account in database
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see project.model.dao.IAccountDAO#getListAccount()
-	 */
 	@Override
-	public List<Account> getListAccount() {
-		// TODO Auto-generated method stub
+	public Account getAccountByUsername(String username) {
+		Account account = null;
+		
+		try {
+			String col = Contants.COL_USERNAME + ", " + Contants.COL_ACCOUNTID 
+					+ ", " + Contants.COL_ISACTIVE + ", " + Contants.COL_ROLE + ", " + Contants.COL_PERSONID;
+			
+			String sel_account = sHelperStr.strSelectWithWhere(col, Contants.TAB_ACCOUNT, 
+					Contants.COL_USERNAME + " = ?");
+			
+			System.out.println(sel_account);
+			
+			pstm = cn.prepareStatement(sel_account);
+			pstm.setString(1, username);
+			
+			rs = pstm.executeQuery();
+			
+			if (rs.next()) {
+				account = new Account();
+				account.setAccountId(rs.getInt(Contants.COL_ACCOUNTID));
+				account.setUsername(rs.getString(Contants.COL_USERNAME));
+				account.setIsActive(rs.getInt(Contants.COL_ISACTIVE));
+				account.setRole(rs.getString(Contants.COL_ROLE));
+				account.setPersonId(rs.getInt(Contants.COL_PERSONID));
+			}
+		} catch (SQLException e) {
+			// TODO write handle try catch sql
+			e.printStackTrace();
+		}
+
+		return account;
+	}
+
+	@Override
+	public String getRoleByUsername(String username) {
+		String sql = sHelperStr.strSelectWithWhere(Contants.COL_ISACTIVE, Contants.TAB_ACCOUNT, Contants.COL_USERNAME + " = ?");
+		
+		try {
+			pstm = cn.prepareStatement(sql);
+			
+			pstm.setString(1, username);
+			
+			rs = pstm.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getString(Contants.COL_ISACTIVE);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 

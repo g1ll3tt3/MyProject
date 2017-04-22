@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectSql {
+import project.common.sqlHelper.ISqlHelperConnection;
+
+public class ConnectSql implements ISqlHelperConnection {
 	private static ConnectSql instance = null;
 	private String IP = "localhost";
 	private String PORT = "1433";
