@@ -54,10 +54,10 @@
 	   	<put-attribute name="body" value="/html/pages/login/error.jsp"/>
    </definition>
    
-   <definition name="login-success" extends="baseLayout"> 
-		<put-attribute name="title" value="Welcome Page"/> 
-	   	<put-attribute name="body" value="/html/pages/login/success.jsp"/>
-   </definition>
+<!--    <definition name="login-success" extends="baseLayout">  -->
+<!-- 		<put-attribute name="title" value="Welcome Page"/>  -->
+<!-- 	   	<put-attribute name="body" value="/html/pages/login/success.jsp"/> -->
+<!--    </definition> -->
    
    <definition name="login-error" extends="baseLayout"> 
 	   	<put-attribute name="title" value="Login Error"/> 
@@ -66,8 +66,13 @@
 <!--    End login area -->
    
    <definition name="about-success" extends="baseLayout"> 
-		<put-attribute name="title" value="Welcome Page"/> 
+		<put-attribute name="title" value="About Page"/> 
 	   	<put-attribute name="body" value="/html/pages/about.jsp"/> 
+   </definition>
+   
+   <definition name="contact-success" extends="baseLayout"> 
+		<put-attribute name="title" value="Contact Page"/> 
+	   	<put-attribute name="body" value="/html/pages/contact.jsp"/> 
    </definition>
    
    <definition name="index-management-success" extends="manamentLayout"> 

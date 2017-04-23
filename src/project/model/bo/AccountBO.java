@@ -4,13 +4,9 @@ import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.hibernate.dialect.Ingres10Dialect;
-
-import project.common.Contants;
 import project.model.bean.Account;
 import project.model.dao.IAccountDAO;
 import project.model.daoImpl.AccountDAOImpl;
-import project.model.enumClass.Role;
 
 public class AccountBO {
 	private static AccountBO instance = null;
@@ -46,6 +42,12 @@ public class AccountBO {
 		return false;	
 	}
 	
+	/**
+	 * Get all information of account use to id or username
+	 * Status: Done
+	 * @param id
+	 * @return Account account
+	 */
 	public Account getAccountByIdOrUsername(String id) {
 		Account account = new Account();
 		
@@ -72,10 +74,6 @@ public class AccountBO {
             role = accountDao.getRoleByAccountId(Integer.valueOf(usernameSession));
         } else { 
             role = accountDao.getRoleByUsername(usernameSession);
-            
-            if (Integer.valueOf(role) == 1) {
-            	role = Role.ADMIN.value();
-            }
         }
         
 		return role;

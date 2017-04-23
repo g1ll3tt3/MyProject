@@ -1,6 +1,8 @@
 package project.common;
 
 public class Contants {
+	
+	//Table name mapping with database
 	public static final String TAB_ACCOUNT = "Account"; // 1
 	public static final String TAB_PROJECT = "Project"; // 2
 	public static final String TAB_PROJECT_OF_ACCOUNT = "ProjectOfAccount"; // 3
@@ -9,7 +11,7 @@ public class Contants {
 	public static final String TAB_COMMENT = "Comment"; // 6
 	public static final String TAB_PERSON = "Person"; // 7
 
-	// Contants variable field in database
+	// Column mapping with database
 	public static final String COL_PROJECTID = "projectId"; // 1
 	public static final String COL_ACCOUNTID = "accountId"; // 2
 	public static final String COL_PROJECTNAME = "projectName"; // 3
@@ -33,6 +35,7 @@ public class Contants {
 	public static final String COL_COMMENTID = "commentId"; // 21
 	public static final String COL_COMMENTCONTENT = "commentContent"; // 22
 
+	// Contants of SESSION
 	public static final String SES_EXIST_SESSION = "exist_session";
 	public static final String SES_NOT_EXIST_SESSION = "not_exist_session";
 	
@@ -59,7 +62,9 @@ public class Contants {
 	public static final String KEY_MAP_SESSION_USERNAME = "username";
 	public static final String KEY_MAP_SESSION_PERSON_ID = "personId";
 	public static final String KEY_MAP_SESSION_ACCOUNT_ID = "accountId";
+	// End Contants of SESSION
 	
+	// Return page
 	public static final String LOGIN_EXIST = "login_exist";
 	public static final String SHOW_lOGIN = "show_login";
 	public static final String ERROR_SHOW_lOGIN = "error_show_login";

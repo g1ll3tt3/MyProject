@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 
+import project.model.enumClass.Active;
 import project.model.enumClass.Role;
 
 public class SessionUtils {
@@ -62,7 +63,7 @@ public class SessionUtils {
 		
 		int active = Integer.valueOf(session.get(Contants.KEY_MAP_SESSION_IS_ACTIVE).toString());
 		
-		if (active == 1) {
+		if (active == Active.ACTIVE.value()) {
 			return true;
 		} else {
 			return false;
