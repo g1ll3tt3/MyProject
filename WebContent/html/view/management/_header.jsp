@@ -4,39 +4,6 @@
 
 <c:set var="varUrl" value="${pageContext.request.contextPath }"></c:set>
 
-<!-- Bootstrap Core CSS -->
-<link href="${varUrl }/css/bootstrap.css" rel="stylesheet">
-
-<!-- MetisMenu CSS -->
-<link href="${varUrl }/css/metisMenu.css" rel="stylesheet">
-
-<!-- Custom CSS -->
-<link href="${varUrl }/css/sb-admin-2.css" rel="stylesheet">
-
-<!-- Morris Charts CSS -->
-<link href="${varUrl }/css/morris.css" rel="stylesheet">
-
-<!-- Custom Fonts -->
-<link href="${varUrl }/css/font-awesome.css" rel="stylesheet" type="text/css">
-
-<!-- jQuery -->
-<script src="${varUrl }/js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="${varUrl }/js/bootstrap.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="${varUrl }/js/metisMenu.js"></script>
-
-<!-- Morris Charts JavaScript -->
-<script src="${varUrl }/js/raphael.js"></script>
-<script src="${varUrl }/js/morris.js"></script>
-<script src="${varUrl }/js/morris-data.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="${varUrl }/js/sb-admin-2.js"></script>
-
-
 <div class="navbar-header">
 	<button type="button" class="navbar-toggle" data-toggle="collapse"
 		data-target=".navbar-collapse">

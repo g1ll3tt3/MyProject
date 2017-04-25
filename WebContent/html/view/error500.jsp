@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	About
+	500 status
 </body>
 </html>

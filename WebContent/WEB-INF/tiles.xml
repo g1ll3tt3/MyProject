@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 
-<!DOCTYPE tiles-definitions PUBLIC 
-"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
- "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+   "jndi:/dtds/tiles-config_2_0.dtd">
 
 <tiles-definitions>
-   
    <definition name="baseLayout" template="/html/view/base_layout.jsp">
       	<put-attribute name="title"  value=""/>
       	<put-attribute name="header" value="/html/view/_header.jsp"/>
@@ -38,6 +36,25 @@
       	<put-attribute name="menu-right" value="/html/view/management/_menu-right.jsp"/>
       	<put-attribute name="body" value=""/>
 		<put-attribute name="footer" value="/html/view/management/_footer.jsp" />
+		
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/css/bootstrap.css" />
+			<add-attribute value="/css/metisMenu.css" />
+			<add-attribute value="/css/sb-admin-2.css" />
+			<add-attribute value="/css/morris.css" />
+			<add-attribute value="/css/font-awesome.css" />
+			<add-attribute value="/css/style.css" />
+		</put-list-attribute>
+
+		<put-list-attribute name="javascripts">
+	        <add-attribute value="/js/jquery-2.2.2.js" />
+	        <add-attribute value="/js/bootstrap.js" />
+	        <add-attribute value="/js/metisMenu.js" />
+	        <add-attribute value="/js/raphael.js" />
+	        <add-attribute value="/js/morris.js" />
+	        <add-attribute value="/js/morris-data.js" />
+	        <add-attribute value="/js/sb-admin-2.js" />
+	    </put-list-attribute>
    </definition>
    
 <!--    Begin Login area -->
