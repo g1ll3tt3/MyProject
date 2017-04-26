@@ -79,8 +79,7 @@
 			<li><a href="#">
 					<div>
 						<p>
-							<strong>Task 2</strong> <span class="pull-right text-muted">20%
-								Complete</span>
+							<strong>Task 2</strong> <span class="pull-right text-muted">20% Complete</span>
 						</p>
 						<div class="progress progress-striped active">
 							<div class="progress-bar progress-bar-info" role="progressbar"
