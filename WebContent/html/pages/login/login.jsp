@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 <c:set var="varUrl" value="${pageContext.request.contextPath }"></c:set>
 
@@ -10,6 +11,7 @@
 
 <div class="container">
 	<div class="row">
+		
 		<div class="col-md-4 col-md-offset-4">
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">
@@ -17,6 +19,12 @@
 				</div>
 				<div class="panel-body">
 					<form action="${varUrl }/auth/checkLogin" method="post" role="form">
+						<s:if test="hasActionErrors()">
+						   <div class="errors">
+						      <s:actionerror/>
+						   </div>
+						</s:if>
+					
 						<fieldset>
 							<div class="form-group">
 								<input class="form-control" placeholder="Account" name="account.username" type="text" autofocus>

@@ -57,6 +57,7 @@ public class Contants {
 	public static final String ACC_NOT_ACTIVE = "account_not_active";
 	public static final String ACC_IS_ACTIVE = "account_is_active";
 	
+	public static final String KEY_MAP_SESSION_ACCOUNT = "account";
 	public static final String KEY_MAP_SESSION_ROLE = "role";
 	public static final String KEY_MAP_SESSION_IS_ACTIVE = "isActive";
 	public static final String KEY_MAP_SESSION_USERNAME = "username";

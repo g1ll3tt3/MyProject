@@ -4,11 +4,19 @@ import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 
+import project.model.bean.Account;
 import project.model.enumClass.Active;
 import project.model.enumClass.Role;
 
 public class SessionUtils {
 	private static SessionUtils instance = null;
+	private Account account = null;
+	
+	public SessionUtils() {
+		Map<String, Object> session = ActionContext.getContext().getSession();
+
+		account = (Account) session.get(Contants.KEY_MAP_SESSION_ACCOUNT);
+	}
 	
 	public static SessionUtils getInstance() {
 		if (instance == null)
@@ -28,15 +36,15 @@ public class SessionUtils {
 	}
 	
 	public String getUsernameSession() {
-		Map<String, Object> session = ActionContext.getContext().getSession();
+//		Map<String, Object> session = ActionContext.getContext().getSession();
 		
-		return session.get(Contants.KEY_MAP_SESSION_USERNAME).toString();
+		return account.getUsername();
 	}
 	
-	public String getAccountIdSession() {
-		Map<String, Object> session = ActionContext.getContext().getSession();
+	public int getAccountIdSession() {
+//		Map<String, Object> session = ActionContext.getContext().getSession();
 		
-		return session.get(Contants.KEY_MAP_SESSION_ACCOUNT_ID).toString();
+		return account.getAccountId();
 	}
 	
 	public String checkSessionType() {
@@ -59,9 +67,9 @@ public class SessionUtils {
 	}
 	
 	public boolean checkIsActive() {
-		Map<String, Object> session = ActionContext.getContext().getSession();
+//		Map<String, Object> session = ActionContext.getContext().getSession();
 		
-		int active = Integer.valueOf(session.get(Contants.KEY_MAP_SESSION_IS_ACTIVE).toString());
+		int active = account.getIsActive();
 		
 		if (active == Active.ACTIVE.value()) {
 			return true;

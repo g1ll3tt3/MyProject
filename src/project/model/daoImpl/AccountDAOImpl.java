@@ -16,6 +16,7 @@ import project.common.sqlHelper.ISqlHelperString;
 import project.common.sqlHelperImpl.SqlHelperImpl;
 import project.model.bean.Account;
 import project.model.dao.IAccountDAO;
+import project.model.enumClass.Active;
 
 /**
  * @author Administrator
@@ -43,21 +44,27 @@ public class AccountDAOImpl implements IAccountDAO {
 	}
 	
 	@Override
-	public boolean checkLogin(Account account) throws SQLException {
-		
-		String sel_account_id = sHelperStr.strSelectWithWhere(Contants.COL_ACCOUNTID, Contants.TAB_ACCOUNT, 
-				Contants.COL_USERNAME + " = ? and " + Contants.COL_PASSWORD + " = ?");
-		
-		System.out.println(sel_account_id);
-		
-		pstm = cn.prepareStatement(sel_account_id);
-		pstm.setString(1, account.getUsername());
-		pstm.setString(2, account.getPassword());
-		
-		rs = pstm.executeQuery();
-		
-		if (rs.next()) {
-			return true;
+	public boolean checkLogin(Account account) {
+		try {
+			String sel_account_id = sHelperStr.strSelectWithWhere(Contants.COL_ACCOUNTID, Contants.TAB_ACCOUNT, 
+					Contants.COL_USERNAME + " = ? and " + Contants.COL_PASSWORD + " = ?");
+			
+			System.out.println(sel_account_id);
+			
+			pstm = cn.prepareStatement(sel_account_id);
+			
+			pstm.setString(1, account.getUsername());
+			pstm.setString(2, account.getPassword());
+			
+			rs = pstm.executeQuery();
+			
+			if (rs.next()) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return false;
@@ -74,7 +81,7 @@ public class AccountDAOImpl implements IAccountDAO {
 			String sel_account = sHelperStr.strSelectWithWhere(col, Contants.TAB_ACCOUNT, 
 					Contants.COL_USERNAME + " = ?");
 			
-			System.out.println(sel_account);
+			System.out.println("SELECT account: " +sel_account);
 			
 			pstm = cn.prepareStatement(sel_account);
 			pstm.setString(1, username);
@@ -108,7 +115,7 @@ public class AccountDAOImpl implements IAccountDAO {
 			String sel_account = sHelperStr.strSelectWithWhere(col, Contants.TAB_ACCOUNT, 
 					Contants.COL_ACCOUNTID + " = ?");
 			
-			System.out.println(sel_account);
+			System.out.println("SELECT account: " +sel_account);
 			
 			pstm = cn.prepareStatement(sel_account);
 			pstm.setInt(1, id);
@@ -127,7 +134,6 @@ public class AccountDAOImpl implements IAccountDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		return account;
 	}
@@ -188,11 +194,33 @@ public class AccountDAOImpl implements IAccountDAO {
 		return false;
 	}
 
+	/**
+	 * Check active for account by username
+	 */
 	@Override
-	public boolean checkIsActive(String id) {
-		// TODO Auto-generated method stub
+	public boolean checkIsActive(String username) {
+		try {
+			String sel_account = sHelperStr.strSelectWithWhere(Contants.COL_ISACTIVE, Contants.TAB_ACCOUNT, 
+					Contants.COL_USERNAME + " = ?");
+			
+			System.out.println("SELECT isActive: " +sel_account);
+			
+			pstm = cn.prepareStatement(sel_account);
+			pstm.setString(1, username);
+			
+			rs = pstm.executeQuery();
+			
+			if (rs.next()) {
+				if (rs.getInt(Contants.COL_ISACTIVE) == Active.ACTIVE.value()) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO handle exception
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
-
 	
 }

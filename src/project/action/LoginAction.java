@@ -2,6 +2,8 @@ package project.action;
 
 import java.util.Map;
 
+import org.apache.struts2.components.ActionError;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -13,9 +15,8 @@ import project.model.bo.AccountBO;
 public class LoginAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
-	
-	
 	private AccountBO accountBo = AccountBO.getInstance();
+	
 	private Account account;
 	
 	/**
@@ -39,35 +40,63 @@ public class LoginAction extends ActionSupport {
 		
 		if (SessionUtils.getInstance().checkSessionEmpty().equals(Contants.SES_NOT_EXIST_SESSION)) {
 			if (account != null) {
+				
+				//TODO call function encrypt password
+				// call function encrypt at StringUtils class
+				
 				if (accountBo.checkLogin(account)) {
+					if (accountBo.isActive(account.getUsername())) {
+						Account accLogin = new Account();
+						
+						accLogin = accountBo.getAccountByIdOrUsername(account.getUsername());
+						
+						session.put(Contants.KEY_MAP_SESSION_ACCOUNT, accLogin);
+
+//						session.put(Contants.KEY_MAP_SESSION_USERNAME, accLogin.getUsername());
+//						session.put(Contants.KEY_MAP_SESSION_ACCOUNT_ID, accLogin.getAccountId());
+//						session.put(Contants.KEY_MAP_SESSION_IS_ACTIVE, accLogin.getIsActive());
+//						session.put(Contants.KEY_MAP_SESSION_ROLE, accLogin.getRole());
+//						session.put(Contants.KEY_MAP_SESSION_PERSON_ID, accLogin.getPersonId());
+						
+						return SUCCESS;
+						
+					} else {
+						
+						this.addActionError("Access denied !!!");
+						
+						return Contants.SHOW_lOGIN;
+					}
 					
-					Account accLogin = new Account();
-					
-					accLogin = accountBo.getAccountByIdOrUsername(account.getUsername());
-					
-					session.put(Contants.KEY_MAP_SESSION_USERNAME, accLogin.getUsername());
-					session.put(Contants.KEY_MAP_SESSION_ACCOUNT_ID, accLogin.getAccountId());
-					session.put(Contants.KEY_MAP_SESSION_IS_ACTIVE, accLogin.getIsActive());
-					session.put(Contants.KEY_MAP_SESSION_ROLE, accLogin.getRole());
-					session.put(Contants.KEY_MAP_SESSION_PERSON_ID, accLogin.getPersonId());
-					
-					return SUCCESS;
 				} else {
-					return ERROR;
+					this.addActionError("I don't know you, dont try to hack me!");
+					
+					return Contants.SHOW_lOGIN;
 				}
+				
 			} else {
 				return Contants.SHOW_lOGIN;
 			}
 
 		}
+		
 		if (SessionUtils.getInstance().checkSessionEmpty().equals(Contants.SES_EXIST_SESSION)) {
-			return SUCCESS;
+			if (SessionUtils.getInstance().checkIsActive()) {
+				return SUCCESS;
+			} else {
+				return ERROR;
+			}
 		} else {
 			return ERROR;
 		}
 
 	}
 
+	/**
+	 * Logout (delete session)
+	 * Status: DONE
+	 * @return String
+	 * @throws Exception
+	 */
 	public String logout() throws Exception {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		
@@ -83,6 +112,9 @@ public class LoginAction extends ActionSupport {
 			return ERROR;
 		}
 	}
+	
+	//TODO validate for Login form
+	
 //	@Override
 //	public void validate() {
 //		if (account.getUsername().length() == (0)) {

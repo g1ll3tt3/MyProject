@@ -29,16 +29,18 @@ public class AccountBO {
 	}
 
 	public boolean checkLogin(Account account) {
-		try {
-			
-			if (accountDao.checkLogin(account)) {
-				return true;
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (accountDao.checkLogin(account)) {
+			return true;
 		}
+			
+		return false;	
+	}
+	
+	public boolean isActive(String username) {
+		if (accountDao.checkIsActive(username)) {
+			return true;
+		}
+			
 		return false;	
 	}
 	
